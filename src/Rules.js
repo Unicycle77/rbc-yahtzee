@@ -73,8 +73,17 @@ class SmallStraight extends Rule {
   evalRoll = dice => {
     const d = new Set(dice);
 
-    // small straight must be 4 different dice in sequence (the high number must be 3 more than the low number)
-    return d.size === 4 && (Math.max(d) === Math.min(d) + 3) ? this.score : 0;
+    // small straight must be 4 different dice in sequence
+      if (dice.includes(3) && dice.includes(4)) {
+      if ( (dice.includes(1) && dice.includes(2))
+        || (dice.includes(2) && dice.includes(5))
+        || (dice.includes(5) && dice.includes(6)) 
+      ) {
+        return this.score;
+      }
+    }
+
+    return 0;
   };
 }
 
