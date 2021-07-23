@@ -69,12 +69,12 @@ class Game extends Component {
   }
 
   render() {
-    let buttonWrapper = this.state.rollsLeft > 0 &&  (
+    const buttonWrapper = (
       <div className='Game-button-wrapper'>
         <button
           className='Game-reroll'
           disabled={this.state.rollsLeft <= 0 || this.state.locked.every(x => x)}
-          onClick={ this.roll}
+          onClick={this.roll}
         >
           {this.state.rollsLeft} Rerolls Left
         </button>
@@ -91,6 +91,7 @@ class Game extends Component {
               dice={this.state.dice}
               locked={this.state.locked}
               handleClick={this.toggleLocked}
+              disabled={this.state.rollsLeft <= 0}
             />
             {buttonWrapper}
           </section>
