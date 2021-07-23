@@ -68,8 +68,14 @@ class FullHouse extends Rule {
 
 /** Check for small straights. */
 
-class SmallStraight {
+class SmallStraight extends Rule {
   // TODO
+  evalRoll = dice => {
+    const d = new Set(dice);
+
+    // small straight must be 4 different dice in sequence (the high number must be 3 more than the low number)
+    return d.size === 4 && (Math.max(d) === Math.min(d) + 3) ? this.score : 0;
+  };
 }
 
 /** Check for large straights. */
@@ -78,7 +84,7 @@ class LargeStraight extends Rule {
   evalRoll = dice => {
     const d = new Set(dice);
 
-    // large straight must be 5 different dice & only one can be a 1 or a 6
+    // large straight must be 5 different dice in sequence (only one can be a 1 or a 6)
     return d.size === 5 && (!d.has(1) || !d.has(6)) ? this.score : 0;
   };
 }
@@ -108,7 +114,7 @@ const fourOfKind = new SumDistro({ count: 4 });
 const fullHouse = new FullHouse({ score: 25 });
 
 // small/large straights score as 30/40
-const smallStraight = "TODO";
+const smallStraight = new SmallStraight({ score: 30 });
 const largeStraight = new LargeStraight({ score: 40 });
 
 // yahtzee scores as 50
