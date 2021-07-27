@@ -78,6 +78,9 @@ class Game extends Component {
     this.animateRoll();
   }
 
+  componentDidMount() {
+    this.animateRoll();
+  }
 
   displayRollInfo() {
     const messages = [
